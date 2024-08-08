@@ -1,20 +1,11 @@
-job('ejemplo-job-DSL') { 
-  description('Job DSL de ejemplo')
-  scm {
-    git('https://github.com/macloujulian/jenkins.job.parametrizado.git', 'main') { node ->
-    node / gitConfigName('Kelly')
-    node / gitConfigEmail('kellystephany24@yahoo.com')
-    }
-  }  
-  parameters {
-    stringParam('nombre', defaultValue = 'Julian', description = 'Parametro de cadena para el Job Booleano')
-    choiceParam('planeta', ['Mercurio', 'Venus', 'Tierrra', 'Marte', 'Jupiter', 'Saturno', 'Urano', 'Neptuno'])
-    booleanParam('agente', false)
-  }
-  triggers {
-    cron('H/7 * * * *')
-  }
-  steps {
-    shell("bash jobscript.sh")
-  }
-}
+#!/bin/bash
+echo "Bienvenido/a al planeta $planeta"
+if [ "$agente" = "true" ]
+then
+	echo "Prepárese para la misión agente X, que la fuerza te acompañe."
+else
+	echo "Disfruta el planeta humano/a $nombre, trata de no morir."
+fi
+echo "..."
+sleep 10
+echo "¡Suerte! La necesitarás."
